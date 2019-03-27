@@ -6,6 +6,7 @@ import random
 import numpy as np
 from sympy import *
 def price(S1,vol1,r1,T1,K1,n1,type1):
+    # parameters
     S = float(S1)
     vol = float(vol1)
     r = float(r1)
@@ -19,9 +20,12 @@ def price(S1,vol1,r1,T1,K1,n1,type1):
     optionprice = [[0 for i in range(0,n+1)]for j in range(0,n+1)]
     dt = T/(n-1)
     df = math.exp(-r*dt)
+    # choosing u and d
     u = math.exp(vol*math.sqrt(dt))
     d = 1/u
-    p = (math.exp(r*dt)-d)/(u-d)
+    # calculate risk neutral probability
+    p = (math.exp(r*dt)-d)/(u-d) 
+    
     if type == "call":
         for num in range(1,n+1):
             for j in range(1,num+1):

@@ -19,9 +19,11 @@ def price(S1, vol1, r1, T1, K1, type1):
         (vol * math.sqrt(T)) + 0.5 * (vol * math.sqrt(T))
     d2 = (math.log(S / K) + r * T) / \
         (vol * math.sqrt(T)) - 0.5 * (vol * math.sqrt(T))
-    cprice = S * stats.norm.cdf(d1) - K*math.exp(-r*T) * stats.norm.cdf(d2)
-    pprice = K*math.exp(-r*T) * stats.norm.cdf(-d2) - S * stats.norm.cdf(-d1)
+        
     if type == "call":
-        return cprice
-    else:
-        return pprice
+        call_price = S * stats.norm.cdf(d1) - K*math.exp(-r*T) * stats.norm.cdf(d2)
+        return call_price
+    else:    
+        put_price = K*math.exp(-r*T) * stats.norm.cdf(-d2) - S * stats.norm.cdf(-d1)
+        return put_price
+
