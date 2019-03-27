@@ -10,59 +10,68 @@ import basket_arithmetic
 import volatility
 
 
+# function
+def clear():
+    ans = ""
+
+
+def selectOption():
+    ans = ""
+
+
 def price():
-    if chosen.get() == "European call/put option":
+    if chosen.get() == "European option":
         price = european.price(entrys.get(), entryvol.get(
         ), entryr.get(), entryt.get(), entryk.get(), entrytype.get())
-        text.set(price)
-    elif chosen.get() == "American call/put option":
+        ans.set(price)
+    elif chosen.get() == "American option":
         price = america.price(entrys.get(), entryvol.get(), entryr.get(
         ), entryt.get(), entryk.get(), entryn.get(), entrytype.get())
-        text.set(price)
+        ans.set(price)
     elif chosen.get() == "Geometric Asian option":
-        price = asian.price(entrys.get(), entryvol.get(), entryr.get(
+        price = asian_geometric.price(entrys.get(), entryvol.get(), entryr.get(
         ), entryt.get(), entryk.get(), entryn.get(), entrytype.get())
-        text.set(price)
+        ans.set(price)
     elif chosen.get() == "Arithmetic Asian option":
-        price = asian2.price(entrypath.get(), entrys.get(), entryvol.get(), entryr.get(
+        price = asian_arithmetic.price(entrypath.get(), entrys.get(), entryvol.get(), entryr.get(
         ), entryt.get(), entryk.get(), entryn.get(), entrytype.get(), entryvariate.get())
-        text.set(price)
+        ans.set(price)
     elif chosen.get() == "Geometric basket option":
         price = basket_geometric.price(entrys.get(), entrys1.get(), entryvol.get(), entryvol1.get(
         ), entryp.get(), entryr.get(), entryt.get(), entryk.get(), entrytype.get())
-        text.set(price)
+        ans.set(price)
     elif chosen.get() == "Arithmetic basket option":
         price = basket_arithmetic.price(entrypath.get(), entrys.get(), entrys1.get(), entryvol.get(), entryvol1.get(
         ), entryp.get(), entryr.get(), entryt.get(), entryk.get(), entrytype.get(), entryvariate.get())
-        text.set(price)
+        ans.set(price)
     elif chosen.get() == "Implied volatility calculator":
         price = volatility.price(entrys.get(), entrypremium.get(), entryr.get(
         ), entryt.get(), entryk.get(), entryrepo.get(), entrytype.get())
-        text.set(price)
+        ans.set(price)
 
 
-#
+# GUI
 root = Tk()
 root.title("Option Pricer")
 
 option_type = Label(root, text="Choose the Option Type")
-comvalue = StringVar()
-chosen = ttk.Combobox(root, textvariable=comvalue, width=25)
+comValue = StringVar()
+chosen = ttk.Combobox(root, textvariable=comValue, width=25)
 chosen["values"] = ["European option", "American option", "Geometric basket option",
-                    "Arithmetic basket option", "Geometric Asian option", "Arithmetic Asian option", "Implied volatility calculator"]
+                    "Arithmetic basket option", "Geometric Asian option", "Arithmetic Asian option",
+                    "Implied volatility calculator"]
 chosen.current(0)
 
 ans = StringVar()
 ans.set("Calc...")
-answer = Label(root, textvariable=ans)
-answer1 = Label(root, text="Answer:",bg="green")
+answer = Label(root, textvariable=ans, bg='yellow', font='Helvetica -16 bold')
+answer1 = Label(root, text="Answer:", bg='yellow', font='Helvetica -16 bold')
 
 hint = StringVar()
 hint.set("Please input the value of necessary parameters.")
 tip = Label(root, textvariable=hint)
 
-button = Button(root, text="  Submit \n  Input  ", bg="green", command=price)
-
+Submitbutton = Button(root, text="  Submit \n  Input  ", bg="green", command=price, font='Helvetica -14 bold')
 
 path = Label(root, text="Monte Carlo paths m")
 entrypath = Entry(root)
@@ -96,7 +105,6 @@ entryrepo = Entry(root)
 premium = Label(root, text="option premium V")
 entrypremium = Entry(root)
 
-
 answer.grid(row=0, rowspan=2, column=1, columnspan=2, pady=10)
 answer1.grid(row=0, rowspan=2, column=0, pady=10, sticky=E)
 option_type.grid(row=2, column=0, padx=10, pady=10, sticky=E)
@@ -106,7 +114,7 @@ put.grid(row=2, column=3, sticky=W)
 
 tip.grid(row=3, columnspan=4, pady=10)
 # left
-S.grid(row=4, column=0, pady=2, padx=10,  sticky=E)
+S.grid(row=4, column=0, pady=2, padx=10, sticky=E)
 vol.grid(row=5, column=0, pady=2, padx=10, sticky=E)
 r.grid(row=6, column=0, pady=2, padx=10, sticky=E)
 T.grid(row=7, column=0, pady=2, padx=10, sticky=E)
@@ -121,12 +129,12 @@ entryk.grid(row=8, column=1, padx=10)
 entrypremium.grid(row=9, column=1, padx=10)
 
 # right
-S1.grid(row=4, column=2, pady=2, padx=10,  sticky=E)
+S1.grid(row=4, column=2, pady=2, padx=10, sticky=E)
 vol1.grid(row=5, column=2, pady=2, padx=10, sticky=E)
 path.grid(row=6, column=2, padx=10, sticky=E)
 n.grid(row=7, column=2, pady=2, padx=10, sticky=E)
-repo_rate.grid(row=8, column=2, pady=2, padx=10,  sticky=E)
-p.grid(row=9, column=2, pady=2, padx=10,  sticky=E)
+repo_rate.grid(row=8, column=2, pady=2, padx=10, sticky=E)
+p.grid(row=9, column=2, pady=2, padx=10, sticky=E)
 variate.grid(row=10, column=2, pady=2, padx=10, sticky=E)
 # right1
 entrys1.grid(row=4, column=3, padx=10)
@@ -137,8 +145,6 @@ entryrepo.grid(row=8, column=3, padx=10)
 entryp.grid(row=9, column=3, padx=10)
 entryvariate.grid(row=10, column=3, padx=10)
 
-
-button.grid(row=11, column=1,rowspan=2, columnspan=2, pady=10)
-
+Submitbutton.grid(row=11, column=1, rowspan=2, columnspan=2, pady=10)
 
 root.mainloop()
