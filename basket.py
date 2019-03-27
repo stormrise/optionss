@@ -8,29 +8,30 @@ import random
 from sympy import *
 
 
-def price(S3, S4, vol3, vol4, p1, r1, T1, K1, type1):
-    S1 = float(S3)
-    S2 = float(S4)
-    vol1 = float(vol3)
-    vol2 = float(vol4)
-    p = float(p1)
-    r = float(r1)
-    T = float(T1)
-    K = float(K1)
-    type = type1
+def price(S1, S2, sigma1, sigma2, rho, r, T, K, option_type):
+    S1_ = float(S1)
+    S2_ = float(S2)
+    sigma1_ = float(sigma1)
+    sigma2_ = float(sigma2)
+    rho_ = float(rho)
+    r_ = float(r)
+    T_ = float(T)
+    K_ = float(K)
+    type_ = option_type
 
-    vol = math.sqrt(vol1*vol1+vol2*vol2+vol1*vol2*p+vol2*vol1*p)/2
-    mean = r-0.5*(vol1*vol1+vol2*vol2)/2+0.5*vol*vol
+    sigma_ = math.sqrt(sigma1_*sigma1_+sigma2_*sigma2_+2 * sigma1_*sigma2_*rho_) / 2
+    mean = r_ - 0.5 * (sigma1_ * sigma1_ + sigma2_ * sigma2_) / 2 + 0.5 * sigma_ * sigma_
 
-    S = math.sqrt(S1*S2)
-    d1 = (math.log(S / K) + (mean + 0.5 * math.pow(vol, 2)) * T) / \
-        (vol * math.sqrt(T))
-    d2 = d1-vol * math.sqrt(T)
-    cprice = math.exp(-r * T) * (S*math.exp(mean*T) *
-                                 stats.norm.cdf(d1) - K * stats.norm.cdf(d2))
-    pprice = math.exp(-r * T) * (K * stats.norm.cdf(-d2) -
-                                 S*math.exp(mean*T)*stats.norm.cdf(-d1))
-    if type == "call":
-        return(cprice)
+    Bg0 = math.sqrt(S1_*S2_)
+    d1 = (math.log(Bg0 / K_) + (mean + 0.5 * math.pow(sigma_, 2)) * T_) / \
+        (sigma_ * math.sqrt(T_))
+    d2 = d1-sigma_ * math.sqrt(T_)
+
+    if type_ == "call":
+        call_price = math.exp(-r_ * T_) * (Bg0 * math.exp(mean * T_) *
+                                       stats.norm.cdf(d1) - K_ * stats.norm.cdf(d2))
+        return(call_price)
     else:
-        return(pprice)
+        put_price = math.exp(-r_ * T_) * (K_ * stats.norm.cdf(-d2) -
+                                       Bg0 * math.exp(mean * T_) * stats.norm.cdf(-d1))
+        return(put_price)
