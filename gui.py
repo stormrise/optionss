@@ -5,8 +5,8 @@ import european
 import america
 import asian
 import asian2
-import basket
-import basket2
+import basket_geometric
+import basket_arithmetic
 import volatility
 
 
@@ -28,11 +28,11 @@ def price():
         ), entryt.get(), entryk.get(), entryn.get(), entrytype.get(), entryvariate.get())
         text.set(price)
     elif chosen.get() == "Geometric basket option":
-        price = basket.price(entrys.get(), entrys1.get(), entryvol.get(), entryvol1.get(
+        price = basket_geometric.price(entrys.get(), entrys1.get(), entryvol.get(), entryvol1.get(
         ), entryp.get(), entryr.get(), entryt.get(), entryk.get(), entrytype.get())
         text.set(price)
     elif chosen.get() == "Arithmetic basket option":
-        price = basket2.price(entrypath.get(), entrys.get(), entrys1.get(), entryvol.get(), entryvol1.get(
+        price = basket_arithmetic.price(entrypath.get(), entrys.get(), entrys1.get(), entryvol.get(), entryvol1.get(
         ), entryp.get(), entryr.get(), entryt.get(), entryk.get(), entrytype.get(), entryvariate.get())
         text.set(price)
     elif chosen.get() == "Implied volatility calculator":
