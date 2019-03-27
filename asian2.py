@@ -45,16 +45,15 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
     #
     drift = math.exp((r-0.5*math.pow(sigma, 2))*dt)
     for num in range(1, path+1):
-        growth = drift*math.exp(sigma*math.sqrt(dt)*random.gauss(0, 1))
-        spath[1] = S*growth
+        growth = drift * math.exp(sigma * math.sqrt(dt) * random.gauss(0, 1))
+        spath[1] = S * growth
         arith = spath[1]
         geo = spath[1]
         for j in range(2, n+1):
-            growth = drift * \
-                math.exp(sigma * math.sqrt(dt) * random.gauss(0, 1))
-            spath[j] = spath[j-1]*growth
-            arith = arith+spath[j]
-            geo = geo*spath[j]
+            growth = drift * math.exp(sigma * math.sqrt(dt) * random.gauss(0, 1))
+            spath[j] = spath[j-1] * growth
+            arith = arith + spath[j]
+            geo = geo * spath[j]
         arithaverage = arith/n
         geoaverage = math.pow(geo, 1/n)
         if option_type == "call":
@@ -100,10 +99,8 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
     # control variate version
     if variate == 0: # no control variate,
         a = arithMean - 1.96 * arithStd / math.sqrt(path)
-        c = str(a)
         b = arithMean + 1.96 * arithStd / math.sqrt(path)
-        d = str(b)
-        return c + "---" + d
+        return str(a) + "---" + str(b)
     elif variate == 1: # geometric Asian option
         for i in range(1, path + 1):
             Z[i] = arithPayoff[i] + theta * (geo_asian_price - geoPayoff[i])
@@ -115,7 +112,5 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
         e = str(zMean)
         f = str(zStd)
         a = zMean - 1.96*zStd/math.sqrt(path)
-        c = str(a)
         b = zMean + 1.96*zStd/math.sqrt(path)
-        d = str(b)
-        return c + "---" + d
+        return str(a) + "---" + str(b)
