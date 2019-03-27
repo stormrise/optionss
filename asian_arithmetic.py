@@ -1,5 +1,5 @@
 # Arithmetic Asian Option
-import asian  # use Geometric Asian
+import asian_geometric  # use Geometric Asian
 import decimal
 import math
 from symtable import Symbol

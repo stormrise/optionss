@@ -3,8 +3,8 @@ from tkinter import ttk
 
 import european
 import america
-import asian
-import asian2
+import asian_geometric
+import asian_arithmetic
 import basket_geometric
 import basket_arithmetic
 import volatility
