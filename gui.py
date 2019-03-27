@@ -1,6 +1,6 @@
-import tkinter
 from tkinter import *
 from tkinter import ttk
+
 import european
 import america
 import asian
@@ -41,9 +41,10 @@ def price():
         text.set(price)
 
 
+#
 root = Tk()
 root.title("Option Pricer")
-comvalue = tkinter.StringVar()
+comvalue = StringVar()
 chosen = ttk.Combobox(root, textvariable=comvalue, width=25)
 chosen["values"] = ["European call/put option", "American call/put option", "Geometric basket option",
                     "Arithmetic basket option", "Geometric Asian option", "Arithmetic Asian option", "Implied volatility calculator"]
@@ -79,11 +80,12 @@ n = Label(root, text="number of steps N")
 entryn = Entry(root)
 type = Label(root, text="option type")
 entrytype = Entry(root)
-variate = Label(root, text="variate")
+variate = Label(root, text="variate (0 or 1)")
 entryvariate = Entry(root)
 repo_rate = Label(root, text="repo rate q")
 entryrepo = Entry(root)
 premium = Label(root, text="option premium V")
+
 entrypremium = Entry(root)
 option_type.grid(row=0, column=0, columnspan=2, padx=20, pady=10, sticky=E)
 chosen.grid(row=0, column=2, columnspan=2, pady=10, padx=20, sticky=W)
@@ -124,4 +126,5 @@ entryvariate.grid(row=8, column=3, padx=20)
 entrypremium.grid(row=9, column=3, padx=20)
 button.grid(row=10, columnspan=4, pady=10)
 answer.grid(row=11, columnspan=4, pady=10)
+
 root.mainloop()
