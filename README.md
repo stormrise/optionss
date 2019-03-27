@@ -4,7 +4,7 @@
 > 
 > - Ran Xin
 > 
-> - Tian yiping
+> - Tian Yiping
 > 
 > - Li Lingxiao
 
@@ -20,6 +20,7 @@ Describe the user interface of your mini option pricer. This is to help us learn
 
 ### Implied volatility
 
+`baskt_geometric.py`
 `volatility.py`
 
 ### American Option
@@ -30,11 +31,13 @@ Describe the user interface of your mini option pricer. This is to help us learn
 
 `baskt_geometric.py`
 
-This file defines a function to calculate the price of geometric basket call/put options
+This file defines a function to calculate the price of geometric basket call/put options.
 
 ### Arithmetic Basket Option
 
 `basket_arithmetic.py`
+
+This file defines a function to calculate the price of arithmetic basket call/put options.
 
 ### Geometric Asian option
 

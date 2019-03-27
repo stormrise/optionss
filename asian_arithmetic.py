@@ -22,7 +22,7 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
     # (no control variate, or geometric Asian option)
 
     # recall Geo_Asian
-    geo_asian_price = asian.price(S, sigma, r, T, K, n, option_type)
+    geo_asian_price = asian_geometric.price(S, sigma, r, T, K, n, option_type)
 
     # pre-define variables and lists
     dt = T/n
@@ -100,7 +100,7 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
     if variate == 0: # no control variate,
         a = arithMean - 1.96 * arithStd / math.sqrt(path)
         b = arithMean + 1.96 * arithStd / math.sqrt(path)
-        return str(a) + "---" + str(b)
+        return "[" + str(a) + "," + str(b) + "]"
     elif variate == 1: # geometric Asian option
         for i in range(1, path + 1):
             Z[i] = arithPayoff[i] + theta * (geo_asian_price - geoPayoff[i])
@@ -113,4 +113,4 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
         f = str(zStd)
         a = zMean - 1.96*zStd/math.sqrt(path)
         b = zMean + 1.96*zStd/math.sqrt(path)
-        return str(a) + "---" + str(b)
+        return "[" + str(a) + "," + str(b) + "]"

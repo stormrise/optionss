@@ -19,78 +19,80 @@ def price(path, S1, S2, sigma1, sigma2, rho, r, T, K, option_type, variate):
     K_ = float(K)
     type_ = option_type
     variate_ = int(variate)
-    arithpayoff = [0 for x in range(0, path_+1)]
-    geopayoff = [0 for x in range(0, path_+1)]
+    arith_payoff = [0 for x in range(0, path_+1)]
+    geo_payoff = [0 for x in range(0, path_+1)]
     Z = [0 for x in range(0, path_+1)]
-    arithsum = 0
-    geosum = 0
-    arithstd = 0
-    geostd = 0
-    xsum = 0
-    zsum = 0
-    zstd = 0
-    bprice = basket_geometric.price(S1_, S2_, sigma1_, sigma2_, rho_, r_, T_, K_, type_)
-    drift1 = math.exp((r_ - 0.5 * math.pow(sigma1_, 2)) * T_)
-    drift2 = math.exp((r_ - 0.5 * math.pow(sigma2_, 2)) * T_)
+    arith_sum = 0
+    geo_sum = 0
+    arith_std = 0
+    geo_std = 0
+    x_sum = 0
+    z_sum = 0
+    z_std = 0
+    basket_price = basket_geometric.price(S1_, S2_, sigma1_, sigma2_, rho_, r_, T_, K_, type_)
+    drift1 = math.exp((r_ - 0.5 * sigma1_ ** 2) * T_)
+    drift2 = math.exp((r_ - 0.5 * sigma2_ ** 2) * T_)
     for num in range(1, path_+1):
         x = random.gauss(0, 1)
-        growth1 = drift1*math.exp(sigma1_*math.sqrt(T_)*x)
-        growth2 = drift2 * \
-            math.exp(sigma2_*math.sqrt(T_) *
-                     (rho_*x+math.sqrt(1-math.pow(rho_, 2))*random.gauss(0, 1)))
-        M1 = S1_*growth1
-        M2 = S2_*growth2
-        M = (M1+M2)/2
-        N = math.sqrt(M1*M2)
+        y = random.gauss(0, 1)
+        growth_factor1 = drift1 * math.exp(sigma1_ * math.sqrt(T_) * x)
+        """We have improved in assignment 2 (2.1) that if X and Y are two independent standard normal random variables,\
+        and Z = rho * X + sqrt(1 - rho ^ 2) * Y, then the correlation coefficient between X and Z is rho.
+        """
+        growth_factor2 = drift2 * \
+            math.exp(sigma2_ * math.sqrt(T_) *
+                     (rho_ * x + math.sqrt(1 - rho ** 2) * y))
+        M1 = S1_ * growth_factor1
+        M2 = S2_ * growth_factor2
+        M = (M1 + M2)/2
+        N = math.sqrt(M1 * M2)
         if type_ == "call":
             if(M > K_):
-                arithpayoff[num] = math.exp(-r_*T_)*(M-K_)
-                arithsum += arithpayoff[num]
+                arith_payoff[num] = math.exp(-r_*T_)*(M-K_)
+                arith_sum += arith_payoff[num]
             else:
-                arithpayoff[num] = 0
+                arith_payoff[num] = 0
             if (N > K_):
-                geopayoff[num] = math.exp(-r_*T_)*(N-K_)
-                geosum += geopayoff[num]
+                geo_payoff[num] = math.exp(-r_*T_)*(N-K_)
+                geo_sum += geo_payoff[num]
             else:
-                geopayoff[num] = 0
+                geo_payoff[num] = 0
         else:
             if (M < K_):
-                arithpayoff[num] = math.exp(-r_ * T_) * (K_-M)
-                arithsum += arithpayoff[num]
+                arith_payoff[num] = math.exp(-r_ * T_) * (K_-M)
+                arith_sum += arith_payoff[num]
             else:
-                arithpayoff[num] = 0
+                arith_payoff[num] = 0
             if (N < K_):
-                geopayoff[num] = math.exp(-r_ * T_) * (K_-N)
-                geosum += geopayoff[num]
+                geo_payoff[num] = math.exp(-r_ * T_) * (K_-N)
+                geo_sum += geo_payoff[num]
             else:
-                geopayoff[num] = 0
-    arithmean = arithsum/path_
-    geomean = geosum/path_
+                geo_payoff[num] = 0
+    arith_mean = arith_sum/path_
+    geo_mean = geo_sum/path_
     for i in range(1, path_+1):
-        arithstd = arithstd + math.pow((arithpayoff[i] - arithmean), 2)
-        geostd = geostd + math.pow((geopayoff[i] - geomean), 2)
-        xsum += arithpayoff[i] * geopayoff[i]
-    arithstd = math.sqrt(arithstd/path_)
-    geostd = math.sqrt(geostd/path_)
-    xmean = xsum/path_
-    covxy = xmean-geomean*arithmean
-    theta = covxy/math.pow(geostd, 2)
+        arith_std += math.pow((arith_payoff[i] - arith_mean), 2)
+        geo_std += math.pow((geo_payoff[i] - geo_mean), 2)
+        x_sum += arith_payoff[i] * geo_payoff[i]
+    arith_std = math.sqrt(arith_std / path_)
+    geo_std = math.sqrt(geo_std / path_)
+    x_mean = x_sum / path_
+    cov_xy = x_mean - geo_mean * arith_mean
+    theta = cov_xy / math.pow(geo_std, 2)
     if variate_ == 1:
         for i in range(1, path_+1):
-            Z[i] = arithpayoff[i]+theta*(bprice - geopayoff[i])
-            zsum += Z[i]
-        zmean = zsum/path_
-        for j in range(1, path_+1):
-            zstd += math.pow((Z[j]-zmean), 2)
-        zstd = math.pow(zstd/path_, 1/2)
-        a = zmean - 1.96 * zstd / math.sqrt(path_)
-        c = str(a)
-        b = zmean + 1.96 * zstd / math.sqrt(path_)
-        d = str(b)
-        return c + "---" + d
+            Z[i] = arith_payoff[i] + theta * (basket_price - geo_payoff[i])
+            z_sum += Z[i]
+        z_mean = z_sum/path_
+        for i in range(1, path_+1):
+            z_std += math.pow((Z[i] - z_mean), 2)
+        z_std = math.sqrt(z_std / path)
+        return "[" + str(z_mean - 1.96 * z_std / math.sqrt(path_)) + ", "\
+               + str(z_mean + 1.96 * z_std / math.sqrt(path_)) + "]"
     elif variate_ == 0:
-        a = arithmean - 1.96 * arithstd / math.sqrt(path_)
+        a = arith_mean - 1.96 * arith_std / math.sqrt(path_)
         c = str(a)
-        b = arithmean + 1.96 * arithstd / math.sqrt(path_)
+        b = arith_mean + 1.96 * arith_std / math.sqrt(path_)
         d = str(b)
-        return c+"---"+d
+        return "[" + str(arith_mean - 1.96 * arith_std / math.sqrt(path_)) + ", "\
+               + str(arith_mean + 1.96 * arith_std / math.sqrt(path_)) + "]"
