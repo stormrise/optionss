@@ -1,3 +1,4 @@
+import traceback
 from tkinter import *
 from tkinter import ttk
 
@@ -25,38 +26,45 @@ def clear():
     entry_n.delete(0, 999)
     entry_p.delete(0, 999)
     entry_q.delete(0, 999)
-    # entryvariate.set(0)
 
 
 def price():
-    if chosen.get() == "European option":
-        price = european.price(entry_s.get(), entry_sig.get(
-        ), entry_r.get(), entry_t.get(), entry_k.get(), optiontype.get())
-        ans.set(price)
-    elif chosen.get() == "American option":
-        price = america.price(entry_s.get(), entry_sig.get(), entry_r.get(
-        ), entry_t.get(), entry_k.get(), entry_n.get(), optiontype.get())
-        ans.set(price)
-    elif chosen.get() == "Geometric Asian option":
-        price = asian_geometric.price(entry_s.get(), entry_sig.get(), entry_r.get(
-        ), entry_t.get(), entry_k.get(), entry_n.get(), optiontype.get())
-        ans.set(price)
-    elif chosen.get() == "Arithmetic Asian option":
-        price = asian_arithmetic.price(entry_m.get(), entry_s.get(), entry_sig.get(), entry_r.get(
-        ), entry_t.get(), entry_k.get(), entry_n.get(), optiontype.get(), entryvariate.get())
-        ans.set(price)
-    elif chosen.get() == "Geometric basket option":
-        price = basket_geometric.price(entry_s.get(), entry_s1.get(), entry_sig.get(), entry_sig1.get(
-        ), entry_p.get(), entry_r.get(), entry_t.get(), entry_k.get(), optiontype.get())
-        ans.set(price)
-    elif chosen.get() == "Arithmetic basket option":
-        price = basket_arithmetic.price(entry_m.get(), entry_s.get(), entry_s1.get(), entry_sig.get(), entry_sig1.get(
-        ), entry_p.get(), entry_r.get(), entry_t.get(), entry_k.get(), optiontype.get(), entryvariate.get())
-        ans.set(price)
-    elif chosen.get() == "Implied volatility calculator":
-        price = volatility.price(entry_s.get(), entry_V.get(), entry_r.get(
-        ), entry_t.get(), entry_k.get(), entry_q.get(), optiontype.get())
-        ans.set(price)
+    try:
+        hint.set("...")
+        if chosen.get() == "European option":
+            price_ans = european.price(entry_s.get(), entry_sig.get(), entry_r.get(), entry_t.get(), entry_k.get(),
+                                       optiontype.get())
+            ans.set(price_ans)
+        elif chosen.get() == "American option":
+            price_ans = america.price(entry_s.get(), entry_sig.get(), entry_r.get(), entry_t.get(), entry_k.get(),
+                                      entry_n.get(), optiontype.get())
+            ans.set(price_ans)
+        elif chosen.get() == "Geometric Asian option":
+            price_ans = asian_geometric.price(entry_s.get(), entry_sig.get(), entry_r.get(), entry_t.get(),
+                                              entry_k.get(), entry_n.get(), optiontype.get())
+            ans.set(price_ans)
+        elif chosen.get() == "Arithmetic Asian option":
+            price_ans = asian_arithmetic.price(entry_m.get(), entry_s.get(), entry_sig.get(), entry_r.get(),
+                                               entry_t.get(), entry_k.get(), entry_n.get(), optiontype.get(),
+                                               entryvariate.get())
+            ans.set(price_ans)
+        elif chosen.get() == "Geometric basket option":
+            price_ans = basket_geometric.price(entry_s.get(), entry_s1.get(), entry_sig.get(), entry_sig1.get(),
+                                               entry_p.get(), entry_r.get(), entry_t.get(), entry_k.get(),
+                                               optiontype.get())
+            ans.set(price_ans)
+        elif chosen.get() == "Arithmetic basket option":
+            price_ans = basket_arithmetic.price(entry_m.get(), entry_s.get(), entry_s1.get(), entry_sig.get(),
+                                                entry_sig1.get(), entry_p.get(), entry_r.get(), entry_t.get(),
+                                                entry_k.get(), optiontype.get(), entryvariate.get())
+            ans.set(price_ans)
+        elif chosen.get() == "Implied volatility calculator":
+            price_ans = volatility.price(entry_s.get(), entry_V.get(), entry_r.get(), entry_t.get(), entry_k.get(),
+                                         entry_q.get(), optiontype.get())
+            ans.set(price_ans)
+    except ValueError:
+        hint.set(traceback.format_exc().splitlines()[-2:])
+        traceback.print_exc()
 
 
 # GUI
