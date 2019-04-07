@@ -8,9 +8,37 @@
 > 
 > - Li Lingxiao
 
-## UI
+## GUI
 
-Describe the user interface of your mini option pricer. This is to help us learn how to run your pricer.
+Using a simple python [tkinter]([https://wiki.python.org/moin/TkInter]) GUI libray to build a simple GUI Option Pricer:
+
+![5ca998a16e750](https://i.loli.net/2019/04/07/5ca998a16e750.png)
+
+- Just like a Calculator the **result answer** shows in the above, highlight in yellow;
+
+- The second line is **Option Type**, it's a combo box, list all avaliable option types: European, American, Asian, Basket; Also you can click the radio button to choose call or put option.
+
+- The third line is **alert information** that informs you about which missing value you forget to input in order to make the calculation. We simply extract the error traceback message to achieve this.
+
+- In the middle area is input value field, all the **input parameters** should be input here, left-hand side is most commonly input one, right-hand side is less common and also symmetric.
+
+- In the bottom center (green) its a **submit** button, and the bottom left (red) is **clear** all input button.
+
+#### How to calc?
+
+Choose option type, here we select "Arithmetic basket option", call, input all the needed parameter, with variate:
+
+![5ca99ef09541a](https://i.loli.net/2019/04/07/5ca99ef09541a.png)
+
+if we forget input the correlation $\rho$ , click submit will be informed,
+
+
+
+![5ca99f671a2cc](https://i.loli.net/2019/04/07/5ca99f671a2cc.png)
+
+after all correct, the answer will be calculated and display in above.
+
+
 
 ## Functionalities
 
@@ -20,7 +48,6 @@ Describe the user interface of your mini option pricer. This is to help us learn
 
 ### Implied volatility
 
-`baskt_geometric.py`
 `volatility.py`
 
 ### American Option
@@ -53,10 +80,10 @@ This file defines a function to calculate the price of arithmetic basket call/pu
 
 how each parameter aﬀects the option price
 
-|     |     |     |
-| --- | --- | --- |
-|     |     |     |
-|     |     |     |
-|     |     |     |
+|        | Call option | Put option   |
+| ------ | ----------- | ------------ |
+| stock  | $\uparrow$  | $\downarrow$ |
+| strike |             |              |
+|        |             |              |
 
 so on

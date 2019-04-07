@@ -63,7 +63,7 @@ def price():
                                          entry_q.get(), optiontype.get())
             ans.set(price_ans)
     except ValueError:
-        hint.set(traceback.format_exc().splitlines()[-2:])
+        hint.set("Still Missing Value: " + str(traceback.format_exc().splitlines()[-2:-1]).strip())
         traceback.print_exc()
 
 
@@ -87,10 +87,10 @@ answer1 = Label(root, text="Answer:", bg='yellow', font='Helvetica -16 bold')
 
 hint = StringVar()
 hint.set("Please input the value of necessary parameters.")
-tip = Label(root, textvariable=hint)
+tip = Label(root, textvariable=hint, fg='red')
 
-submitBtn = Button(root, text="  Submit \n  Input  ", bg="green", command=price, font='Helvetica -14 bold')
-clearBtn = Button(root, text="clear input", bg="red", command=clear, font='Helvetica -14 bold')
+submitBtn = Button(root, text="  Submit \n  Input  ", fg="green", command=price, font='Helvetica -14 bold')
+clearBtn = Button(root, text="clear input", fg="red", command=clear, font='Helvetica -14 bold')
 
 optiontype = StringVar()
 call = Radiobutton(root, text="call", variable=optiontype, value="call")
