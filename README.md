@@ -1,6 +1,6 @@
 # options
 
-> Contributions:
+> :+1:Contributions:
 > 
 > - Ran Xin
 > 
@@ -28,7 +28,7 @@ Using a simple python [tkinter]([https://wiki.python.org/moin/TkInter]) GUI libr
 
 Choose option type, here we select "Arithmetic basket option", call, input all the needed parameter, with variate:
 
-if we forget input the correlation $\rho$ , click submit will be informed,
+if we forget input the correlation ρ , click submit will be informed,
 
 ![5ca99ef09541a](https://i.loli.net/2019/04/07/5ca99ef09541a.png)
 
@@ -78,10 +78,13 @@ This file defines a function to calculate the price of arithmetic basket call/pu
 
 how each parameter aﬀects the option price
 
-|        | Call option | Put option   |
-| ------ | ----------- | ------------ |
-| stock  | $\uparrow$  | $\downarrow$ |
-| strike |             |              |
-|        |             |              |
+|                      | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+|                      |             |            |
 
-so on
+TODO
