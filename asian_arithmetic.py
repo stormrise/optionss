@@ -1,12 +1,10 @@
 # Arithmetic Asian Option
-import asian_geometric  # use Geometric Asian
-# import decimal
 import math
-# from symtable import Symbol
-# from scipy import stats
 import random
 from sympy import *
 import numpy as np
+
+import asian_geometric  # use Geometric Asian
 
 
 def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
