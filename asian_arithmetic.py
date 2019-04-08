@@ -6,6 +6,7 @@ from symtable import Symbol
 from scipy import stats
 import random
 from sympy import *
+import numpy as np
 
 
 def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
@@ -25,92 +26,99 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
     geo_asian_price = asian_geometric.price(S, sigma, r, T, K, n, option_type)
 
     # pre-define variables and lists
-    dt = T/n
-    spath = [0 for x in range(0, path+1)]
-    arithPayoff = [0 for x in range(0, path+1)]
-    geoPayoff = [0 for x in range(0, path+1)]
-    Z = [0 for x in range(0, path+1)]
-    num = 1
-    j = 2
-    geo = 0
-    geoSum = 0
-    geoStd = 0
-    arith = 0
-    arithSum = 0
-    arithStd = 0
-    xSum = 0
-    zSum = 0
-    zStd = 0
+    dt = T / n
+    spath = [0 for x in range(0, path + 1)]
+    arith_payoff = [0 for x in range(0, path + 1)]
+    geo_payoff = [0 for x in range(0, path + 1)]
+    # Z = [0 for x in range(0, path + 1)]
+    # num = 1
+    # j = 2
+    # geo = 0
+    # geo_sum = 0
+    # geo_std = 0
+    # arith = 0
+    # arith_sum = 0
+    # arith_std = 0
+    # xSum = 0
+    # z_sum = 0
+    # z_std = 0
 
     #
-    drift = math.exp((r-0.5*math.pow(sigma, 2))*dt)
-    for num in range(1, path+1):
+    drift = math.exp((r - 0.5 * math.pow(sigma, 2)) * dt)
+    for num in range(1, path + 1):
         growth = drift * math.exp(sigma * math.sqrt(dt) * random.gauss(0, 1))
         spath[1] = S * growth
         arith = spath[1]
         geo = spath[1]
-        for j in range(2, n+1):
+        for j in range(2, n + 1):
             growth = drift * math.exp(sigma * math.sqrt(dt) * random.gauss(0, 1))
-            spath[j] = spath[j-1] * growth
+            spath[j] = spath[j - 1] * growth
             arith = arith + spath[j]
             geo = geo * spath[j]
-        arithaverage = arith/n
-        geoaverage = math.pow(geo, 1/n)
+        arith_average = arith / n
+        geo_average = math.pow(geo, 1 / n)
         if option_type == "call":
-            if arithaverage > K:
-                arithPayoff[num] = math.exp(-r*T)*(arithaverage-K)
+            arith_payoff.append(max(math.exp(-r * T) * (arith_average - K), 0))
+            geo_payoff.append(max(math.exp(-r * T) * (geo_average - K), 0))
+            """if arith_average > K:
+                arith_payoff[num] = math.exp(-r*T)*(arith_average-K)
             else:
-                arithPayoff[num] = 0
-            if geoaverage > K:
-                geoPayoff[num] = math.exp(-r*T)*(geoaverage-K)
+                arith_payoff[num] = 0
+            if geo_average > K:
+                geo_payoff[num] = math.exp(-r*T)*(geo_average-K)
             else:
-                geoPayoff[num] = 0
+                geo_payoff[num] = 0"""
         else:  # put
-            if arithaverage < K:
-                arithPayoff[num] = math.exp(-r * T) * (K - arithaverage)
+            arith_payoff.append(max(math.exp(-r * T) * (K - arith_average), 0))
+            geo_payoff.append(max(math.exp(-r * T) * (K - geo_average), 0))
+            """if arith_average < K:
+                arith_payoff[num] = math.exp(-r * T) * (K - arith_average)
             else:
-                arithPayoff[num] = 0
-            if geoaverage < K:
-                geoPayoff[num] = math.exp(-r * T) * (K - geoaverage)
+                arith_payoff[num] = 0
+            if geo_average < K:
+                geo_payoff[num] = math.exp(-r * T) * (K - geo_average)
             else:
-                geoPayoff[num] = 0
+                geo_payoff[num] = 0"""
 
     # Arithmetic mean
-    for i in range(1, path+1):
-        arithSum += arithPayoff[i]
-    arithMean = arithSum/path
-    for i in range(1, path+1):
-        arithStd = arithStd + math.pow((arithPayoff[i]-arithMean), 2)
-    arithStd = math.pow(arithStd/path, 1/2)
+    arith_mean = np.mean(np.array(arith_payoff))
+    arith_std = np.std(np.array(arith_payoff))
+    """for i in range(1, path + 1):
+        arith_sum += arith_payoff[i]
+    arith_mean = arith_sum / path
+    for i in range(1, path + 1):
+        arith_std = arith_std + math.pow((arith_payoff[i] - arith_mean), 2)
+    arith_std = math.pow(arith_std / path, 1 / 2)"""
     # Geometric mean
-    for i in range(1, path+1):
-        geoSum += geoPayoff[i]
-    geoMean = geoSum/path
-    for i in range(1, path+1):
-        geoStd = geoStd + math.pow((geoPayoff[i]-geoMean), 2)
-    geoStd = math.pow(geoStd/path, 1/2)
+    geo_mean = np.mean(np.array(geo_payoff))
+    geo_std = np.std(np.array(geo_payoff))
+    """for i in range(1, path + 1):
+        geo_sum += geo_payoff[i]
+    geo_mean = geo_sum / path
+    for i in range(1, path + 1):
+        geo_std = geo_std + math.pow((geo_payoff[i] - geo_mean), 2)
+    geo_std = math.pow(geo_std / path, 1 / 2)"""
     # Control Variate
-    for i in range(1, path+1):
-        xSum += arithPayoff[i]*geoPayoff[i]
-    xMean = xSum/path
-    covXY = xMean - geoMean * arithMean
-    theta = covXY/math.pow(geoStd, 2)
+    """for i in range(1, path + 1):
+        xSum += arith_payoff[i] * geo_payoff[i]
+    xMean = xSum / path"""
+    cov_xy = np.mean(np.array(arith_payoff) * np.array(geo_payoff)) - geo_mean * arith_mean
+    theta = cov_xy / math.pow(geo_std, 2)
 
     # control variate version
-    if variate == 0: # no control variate,
-        a = arithMean - 1.96 * arithStd / math.sqrt(path)
-        b = arithMean + 1.96 * arithStd / math.sqrt(path)
+    if variate == 0:  # no control variate,
+        a = arith_mean - 1.96 * arith_std / math.sqrt(path)
+        b = arith_mean + 1.96 * arith_std / math.sqrt(path)
         return "[" + str(a) + "," + str(b) + "]"
-    elif variate == 1: # geometric Asian option
-        for i in range(1, path + 1):
-            Z[i] = arithPayoff[i] + theta * (geo_asian_price - geoPayoff[i])
-            zSum += Z[i]
-        zMean = zSum / path
-        for j in range(1, path + 1):
-            zStd += math.pow((Z[j] - zMean), 2)
-        zStd = math.pow(zStd/path, 1 / 2)
-        e = str(zMean)
-        f = str(zStd)
-        a = zMean - 1.96*zStd/math.sqrt(path)
-        b = zMean + 1.96*zStd/math.sqrt(path)
+    elif variate == 1:  # geometric Asian option
+        """for i in range(1, path + 1):
+            Z[i] = arith_payoff[i] + theta * (geo_asian_price - geo_payoff[i])
+            zSum += Z[i]"""
+        z_sum = np.array(arith_payoff) + theta * (geo_asian_price - np.array(geo_payoff))
+        z_mean = np.mean(z_sum)
+        """for j in range(1, path + 1):
+            z_std += math.pow((Z[j] - z_mean), 2)"""
+        z_std = np.std(z_sum)
+        a = z_mean - 1.96 * z_std / math.sqrt(path)
+        b = z_mean + 1.96 * z_std / math.sqrt(path)
         return "[" + str(a) + "," + str(b) + "]"

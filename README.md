@@ -28,17 +28,15 @@ Using a simple python [tkinter]([https://wiki.python.org/moin/TkInter]) GUI libr
 
 Choose option type, here we select "Arithmetic basket option", call, input all the needed parameter, with variate:
 
-![5ca99ef09541a](https://i.loli.net/2019/04/07/5ca99ef09541a.png)
-
 if we forget input the correlation $\rho$ , click submit will be informed,
 
-
-
-![5ca99f671a2cc](https://i.loli.net/2019/04/07/5ca99f671a2cc.png)
+![5ca99ef09541a](https://i.loli.net/2019/04/07/5ca99ef09541a.png)
 
 after all correct, the answer will be calculated and display in above.
 
+![5ca99f671a2cc](https://i.loli.net/2019/04/07/5ca99f671a2cc.png)
 
+---
 
 ## Functionalities
 
