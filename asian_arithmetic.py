@@ -27,9 +27,9 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
 
     # pre-define variables and lists
     dt = T / n
-    spath = [0 for x in range(0, path + 1)]
-    arith_payoff = [0 for x in range(0, path + 1)]
-    geo_payoff = [0 for x in range(0, path + 1)]
+    spath = [0]
+    arith_payoff = []
+    geo_payoff = []
     # Z = [0 for x in range(0, path + 1)]
     # num = 1
     # j = 2
@@ -45,12 +45,12 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
 
     #
     drift = math.exp((r - 0.5 * math.pow(sigma, 2)) * dt)
-    for num in range(1, path + 1):
+    for num in range(path):
         growth = drift * math.exp(sigma * math.sqrt(dt) * random.gauss(0, 1))
-        spath[1] = S * growth
-        arith = spath[1]
-        geo = spath[1]
-        for j in range(2, n + 1):
+        spath[0] = S * growth
+        arith = spath[0]
+        geo = spath[0]
+        for j in range(1, n):
             growth = drift * math.exp(sigma * math.sqrt(dt) * random.gauss(0, 1))
             spath[j] = spath[j - 1] * growth
             arith = arith + spath[j]
