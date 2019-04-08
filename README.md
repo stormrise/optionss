@@ -29,10 +29,8 @@ Environment requirements:
   - random: for generating Gaussian distribution random numbers
   
   - numpy: for matrix operations
-  
-  To Run our option pricer, just put all the .py files in the same directory, and run gui.py.
 
-
+To Run our option pricer, just put all the .py files in the same directory, and run gui.py.
 
 ## GUI
 
@@ -82,13 +80,13 @@ after all correct, the answer will be calculated and display in above.
 
 `baskt_geometric.py`
 
-This file defines a function to calculate the price of geometric basket call/put options.
+This file defines a function to calculate the price of geometric basket call/put options. All the inputs of this function are strings captured by GUI so the fisrt step is type conversion. Then, just follow the formulas described in mathematical background in "assignment 3", we can figure out the call or put geometric basket option.
 
 ### Arithmetic Basket Option
 
 `basket_arithmetic.py`
 
-This file defines a function to calculate the price of arithmetic basket call/put options.
+This file defines a function to calculate the price of arithmetic basket call/put options. The first step is also type conversion of inputted varibles. For arithmetic option price, there is no closed-form formulas so we need to use Monte Carlo to simulate it. We use the method proved in assignment 2 (2.1)  to generate two random varibles with correlation coefficient σ. Then, similar to Asian option, we can calculate the basket option price (95% confidence interval) with or without control variate.
 
 ### Geometric Asian option
 
