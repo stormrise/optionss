@@ -10,6 +10,7 @@ def price_call(S, K, T, vol, r, q):
         (vol * math.sqrt(T)) + 0.5 * (vol * math.sqrt(T))
     d2 = (math.log(S / K) + (r - q) * T) / \
         (vol * math.sqrt(T)) - 0.5 * (vol * math.sqrt(T))
+    # C(σ)
     C = S * math.exp(-q * T) * stats.norm.cdf(d1) - K * \
         math.exp(-r * T) * stats.norm.cdf(d2)
     return C
@@ -28,8 +29,9 @@ def price_put(S, K, T, vol, r, q):
 def vega_call(S, K, T, vol, r, q):
     d1 = (math.log(S / K) + (r - q) * T) / \
         (vol * math.sqrt(T)) + 0.5 * (vol * math.sqrt(T))
-    b = stats.norm.pdf(d1)
-    vega = S * math.exp(-q*T)*math.sqrt(T) * b
+    #b = stats.norm.pdf(d1)
+    vega = S * math.exp(-q*T)*math.sqrt(T) / \
+           math.sqrt(2 * math.pi)*math.exp(-(d1**2)*0.5)
     return vega
 
 
@@ -45,10 +47,10 @@ def price(S1, Strue, r1, T1, K1, q1, type1):
     sigma = sigmahat
     tol = 10 ** (-8)
     n = 1
-    nmax = 100
+    nmax = 10000
     sigmadiff = 1
 
-    while n < nmax and sigmadiff > tol:
+    while n < nmax and sigmadiff >= tol:
         vega = vega_call(S, K, T, sigma, r, q)
         if type == "call":
             C = price_call(S, K, T, sigma, r, q)
