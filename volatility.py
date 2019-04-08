@@ -56,9 +56,12 @@ def price(S1, Strue, r1, T1, K1, q1, type1):
             C = price_call(S, K, T, sigma, r, q)
         else:
             C = price_put(S, K, T, sigma, r, q)
-        incresment = (C - cbidtrue) / vega
-        sigma = sigma - incresment
+        increment = (C - cbidtrue) / vega
+        sigma = sigma - increment
         n = n + 1
-        sigmadiff = abs(incresment)
+        sigmadiff = abs(increment)
 
-    return sigma
+    if sigmadiff > 1 or sigmadiff is None:
+        return "no convergence"
+    else:
+        return sigma
