@@ -1,9 +1,9 @@
 # Arithmetic Asian Option
 import asian_geometric  # use Geometric Asian
-import decimal
+# import decimal
 import math
-from symtable import Symbol
-from scipy import stats
+# from symtable import Symbol
+# from scipy import stats
 import random
 from sympy import *
 import numpy as np

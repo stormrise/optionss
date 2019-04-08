@@ -1,7 +1,5 @@
 # Geometric Asian Option
-import decimal
 import math
-from symtable import Symbol
 from scipy import stats
 from sympy import *
 

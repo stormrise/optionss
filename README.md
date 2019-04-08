@@ -8,6 +8,32 @@
 > 
 > - Li Lingxiao
 
+## How to Run
+
+Environment requirements:
+
+- Environment: Python 3.6
+
+- Packages: 
+  
+  - tkinter: for UI
+  
+  - traceback: capturing log
+  
+  - math: for some math function calculations such as root, square and so on
+  
+  - scipy: for standard normal distribution density function calculation
+  
+  - sympy: 
+  
+  - random: for generating Gaussian distribution random numbers
+  
+  - numpy: for matrix operations
+  
+  To Run our option pricer, just put all the .py files in the same directory, and run gui.py.
+
+
+
 ## GUI
 
 Using a simple python [tkinter]([https://wiki.python.org/moin/TkInter]) GUI libray to build a simple GUI Option Pricer:
@@ -80,10 +106,10 @@ how each parameter aﬀects the option price
 
 |                      | Call option | Put option |
 | -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
 | maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
 | volatility (σ) ↑     | ↑           | ↓          |
 |                      |             |            |
 
