@@ -31,7 +31,7 @@ Environment requirements:
 :red_circle:To **Run** our option pricer, just put all the .py files in the same directory, and run `gui.py`. 
 
 ```bash
-$> python3 gui.py
+bash:~$ python3 gui.py
 ```
 
 ## GUI
@@ -66,6 +66,28 @@ after all correct, the answer will be calculated and display in above.
 
 ## Functionalities
 
+> #### parameter in code
+> 
+> spot price  **S**
+> 
+> volatility **sigma**
+> 
+> risk-free rate **r**
+> 
+> time to maturity **T**
+> 
+> strike **K**
+> 
+> option premium **V**
+> 
+> Monte Carlo paths **path**
+> 
+> average steps **n**
+> 
+> repo rate **q**
+> 
+> correlation **rho**
+
 ### European Option
 
 `european.py`
@@ -80,27 +102,27 @@ after all correct, the answer will be calculated and display in above.
 
 ### Geometric Basket Option
 
-`baskt_geometric.py`
+`baskt_geometric.py`    *(S1, S2, sigma1, sigma2, rho, r, T, K, option_type)*
 
 This file defines a function to calculate the price of geometric basket call/put options. All the inputs of this function are strings captured by GUI so the fisrt step is type conversion. Then, just follow the formulas described in mathematical background in "assignment 3", we can figure out the call or put geometric basket option.
 
 ### Arithmetic Basket Option
 
-`basket_arithmetic.py`
+`basket_arithmetic.py`    *(path, S1, S2, sigma1, sigma2, rho, r, T, K, option_type, variate)*
 
 This file defines a function to calculate the price of arithmetic basket call/put options. The first step is also type conversion of inputted varibles. For arithmetic option price, there is no closed-form formulas so we need to use Monte Carlo to simulate it. We use the method proved in assignment 2 (2.1)  to generate two random varibles with correlation coefficient σ. Then, similar to Asian option, we can calculate the basket option price (95% confidence interval) with or without control variate.
 
 ### Geometric Asian option
 
-`asian_geometric.py`
+`asian_geometric.py`    *(S, sigma, r, T, K, n, option_type)*
 
-This file defines a function to calculate the price of geometric asian call/put options.
+This file defines a function to calculate the price of geometric asian call/put options. And there is a closed formular we can simply implement it.
 
 ### Arithmetic Asian option
 
-`asian_arithmetic.py`
+`asian_arithmetic.py`   *(path, S, sigma, r, T, K, n, option_type, variate)*
 
-This file defines a function to calculate the price of arithmetic asian call/put options.
+This file defines a function to calculate the price of arithmetic asian call/put options. There is no closed-form formulas so we need to use Monte Carlo to simulate it.
 
 ---
 
