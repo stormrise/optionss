@@ -1,6 +1,6 @@
 # options
 
-> :+1:Contributions:
+> :thumbsup:Contributions:
 > 
 > - Ran Xin
 > 
@@ -12,25 +12,27 @@
 
 Environment requirements:
 
-- Environment: Python 3.6
+- **Environment**: Python 3.6
 
-- Packages: 
-  
+- **Packages**: 
+
   - tkinter: for UI
-  
+
   - traceback: capturing log
-  
+
   - math: for some math function calculations such as root, square and so on
-  
+
   - scipy: for standard normal distribution density function calculation
-  
-  - sympy: 
-  
+
   - random: for generating Gaussian distribution random numbers
-  
+
   - numpy: for matrix operations
 
-To Run our option pricer, just put all the .py files in the same directory, and run gui.py.
+:red_circle:To **Run** our option pricer, just put all the .py files in the same directory, and run `gui.py`. 
+
+```bash
+$> python3 gui.py
+```
 
 ## GUI
 
@@ -92,9 +94,13 @@ This file defines a function to calculate the price of arithmetic basket call/pu
 
 `asian_geometric.py`
 
+This file defines a function to calculate the price of geometric asian call/put options.
+
 ### Arithmetic Asian option
 
 `asian_arithmetic.py`
+
+This file defines a function to calculate the price of arithmetic asian call/put options.
 
 ---
 
@@ -111,4 +117,4 @@ how each parameter aﬀects the option price
 | volatility (σ) ↑     | ↑           | ↓          |
 |                      |             |            |
 
-TODO
+TODO:floppy_disk:

@@ -1,7 +1,7 @@
 # Arithmetic Asian Option
 import math
 import random
-from sympy import *
+# from sympy import *
 import numpy as np
 
 import asian_geometric  # use Geometric Asian

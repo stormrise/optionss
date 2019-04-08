@@ -1,7 +1,7 @@
 # Geometric Asian Option
 import math
 from scipy import stats
-from sympy import *
+# from sympy import *
 
 
 def price(S1, sigma1, r1, T1, K1, n1, option_type1):
@@ -14,10 +14,8 @@ def price(S1, sigma1, r1, T1, K1, n1, option_type1):
     option_type = option_type1
 
     sigmahat = sigma * math.sqrt((n + 1) * (2 * n + 1) / (6 * math.pow(n, 2)))
-    mu = (r - 0.5 * math.pow(sigma, 2)) * (n + 1) / \
-         (2 * n) + 0.5 * math.pow(sigmahat, 2)
-    d1 = (math.log(S / K) + (mu + 0.5 * math.pow(sigmahat, 2)) * T) / \
-         (sigmahat * math.sqrt(T))
+    mu = (r - 0.5 * math.pow(sigma, 2)) * (n + 1) / (2 * n) + 0.5 * math.pow(sigmahat, 2)
+    d1 = (math.log(S / K) + (mu + 0.5 * math.pow(sigmahat, 2)) * T) / (sigmahat * math.sqrt(T))
     d2 = d1 - sigmahat * math.sqrt(T)
 
     if option_type == "call":

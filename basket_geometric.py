@@ -1,7 +1,7 @@
 # import decimal
 import math
 from scipy import stats
-from sympy import *
+# from sympy import *
 
 
 def price(S1, S2, sigma1, sigma2, rho, r, T, K, option_type):

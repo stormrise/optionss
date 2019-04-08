@@ -1,6 +1,6 @@
 import math
 import random
-from sympy import *
+# from sympy import *
 import numpy as np
 
 import basket_geometric
