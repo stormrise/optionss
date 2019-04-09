@@ -118,11 +118,9 @@ This file defines a function to calculate the price of arithmetic asian call/put
 
 how each parameter aﬀects the option price
 
-#### Test cases:
-
 r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000. RandomSeed(1234)
 
-**Asian option:**
+#### Asian option:
 
 | σ   | K   | n   | Type | Geometric | Arithmetic    | Arithmetic(variate) |
 | --- | --- | --- | ---- | --------- | ------------- | ------------------- |
@@ -134,7 +132,25 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 | 0.3 | 100 | 100 | Call | 13.138    | 14.482~14.768 | 14.598~14.620       |
 | 0.4 | 100 | 50  | Call | 15.759    | 18.072~18.476 | 18.181~18.222       |
 
-**Basket options:**
+| Geometric Asian      | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
+
+| Arithmetic Asian     | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
+
+#### Basket options:
 
 | S1(0) | S2(0) | K   | σ1  | σ2  | ρ   | Type | Geometric | Arithmetic    | Arithmetic(variate) |
 | ----- | ----- | --- | --- | --- | --- | ---- | --------- | ------------- | ------------------- |
@@ -152,7 +168,25 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 | 100   | 100   | 120 | 0.3 | 0.3 | 0.5 | Call | 14.685    | 16.434~16.854 | 16.559~16.617       |
 | 100   | 100   | 100 | 0.5 | 0.5 | 0.5 | Call | 28.449    | 34.598~35.537 | 34.865~35.071       |
 
-#### Analysis:
+| Geometric Basket     | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
+
+| Arithmetic Basket    | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
+
+#### European:
 
 | European             | Call option | Put option |
 | -------------------- | ----------- | ---------- |
@@ -173,42 +207,6 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 | repo rate (q)        |             |            |
 
 | American             | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
-
-| Geometric Basket     | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
-
-| Arithmetic Basket    | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
-
-| Geometric Asian      | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
-
-| Arithmetic Asian     | Call option | Put option |
 | -------------------- | ----------- | ---------- |
 | spot price (S) ↑     |             |            |
 | strike (K) ↑         | ↓↓          | ↑↑         |
