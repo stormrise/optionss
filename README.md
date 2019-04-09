@@ -132,23 +132,15 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 | 0.3 | 100 | 100 | Call | 13.138    | 14.482~14.768 | 14.598~14.620       |
 | 0.4 | 100 | 50  | Call | 15.759    | 18.072~18.476 | 18.181~18.222       |
 
-| Geometric Asian      | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
+| Geometric Asian     | Call option | Put option |
+| ------------------- | ----------- | ---------- |
+| volatility (σ) ↑    | ↑↑          | ↑↑         |
+| average steps (n) ↑ | ↓           | ↓          |
 
-| Arithmetic Asian     | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
+| Arithmetic Asian    | Call option | Put option |
+| ------------------- | ----------- | ---------- |
+| volatility (σ) ↑    | ↑↑          | ↑↑         |
+| average steps (n) ↑ | ↓           | ↓          |
 
 #### Basket options:
 
