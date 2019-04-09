@@ -58,6 +58,7 @@ def price(S1, Strue, r1, T1, K1, q1, type1):
         n = n + 1
         sigmadiff = abs(increment)
 
+    """check if the Newton method reach a convergence"""
     if sigmadiff > 1 or sigmadiff is None:
         return "no convergence"
     else:
