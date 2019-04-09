@@ -1,4 +1,4 @@
-# options
+# Group 17's option pricer
 
 > :thumbsup:Contributions:
 > 
@@ -15,17 +15,17 @@ Environment requirements:
 - **Environment**: Python 3.6
 
 - **Packages**: 
-
+  
   - tkinter: for UI
-
+  
   - traceback: capturing log
-
+  
   - math: for some math function calculations such as root, square and so on
-
+  
   - scipy: for standard normal distribution density function calculation
-
+  
   - random: for generating Gaussian distribution random numbers
-
+  
   - numpy: for matrix operations
 
 :red_circle:To **Run** our option pricer, just put all the .py files in the same directory, and run `gui.py`. 
