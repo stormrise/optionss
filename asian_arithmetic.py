@@ -27,7 +27,7 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
     spath = [0 for x in range(0, path)]
     arith_payoff = []
     geo_payoff = []
-
+    random.seed(1234)
     #
     drift = math.exp((r - 0.5 * math.pow(sigma, 2)) * dt)
     for num in range(path):

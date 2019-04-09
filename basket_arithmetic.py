@@ -20,6 +20,7 @@ def price(path, S1, S2, sigma1, sigma2, rho, r, T, K, option_type, variate):
     arith_payoff = []
     geo_payoff = []
 
+    random.seed(1234)
     basket_price = basket_geometric.price(S1_, S2_, sigma1_, sigma2_, rho_, r_, T_, K_, type_)
     drift1 = math.exp((r_ - 0.5 * sigma1_ ** 2) * T_)
     drift2 = math.exp((r_ - 0.5 * sigma2_ ** 2) * T_)
