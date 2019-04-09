@@ -66,43 +66,25 @@ after all correct, the answer will be calculated and display in above.
 
 ## Functionalities
 
-> #### parameter in code
+> **parameter in code**
 > 
-> spot price  **S**
-> 
-> volatility **sigma**
-> 
-> risk-free rate **r**
-> 
-> time to maturity **T**
-> 
-> strike **K**
-> 
-> option premium **V**
-> 
-> Monte Carlo paths **path**
-> 
-> average steps **n**
-> 
-> repo rate **q**
-> 
-> correlation **rho**
+> spot price  **S**, volatility **sigma**, risk-free rate **r**, time to maturity **T**, strike **K**, option premium **V**, Monte Carlo paths **path**, average steps **n**, repo rate **q**, correlation **rho**
 
 ### European Option
 
-`european.py`
+`european.py`    *(S, sigma, r, T, K, type, q)*
 
 This file defines a function to calculate the price of European call/put options. And there is a closed formular, we can simply implement it.
 
 ### Implied volatility
 
-`volatility.py`
+`volatility.py`    *(S, S_true, r, T, K, q, type)*
 
 This file defines a function to calculate the implied volatility of call/put options. All the inputs of this function are strings captured by GUI so the first step is type conversion. Then, just follow the formulas in "lecture 4" using Newton Method to solve the problem which converges quickly, we can figure out the implied volatility of call/put options.
 
 ### American Option
 
-`american.py`
+`american.py`    *(S, sigma, r, T, K, n, type)*
 
 This file defines a function to calculate the price of American call/put options. All the inputs of this function are strings captured by GUI so the first step is type conversion. There is no closed formular, so we use bionominal tree to solve it. First step is to iterate the bionominal tree and calculate the stock price in each node. Second step is to backtrack the tree and calculate the price of call/put options.
 
@@ -136,13 +118,67 @@ This file defines a function to calculate the price of arithmetic asian call/put
 
 how each parameter aﬀects the option price
 
-|                      | Call option | Put option |
+| European             | Call option | Put option |
 | -------------------- | ----------- | ---------- |
 | spot price (S) ↑     |             |            |
 | strike (K) ↑         | ↓↓          | ↑↑         |
 | maturity (T) ↑       | ↑           | ↓          |
 | risk free rate (r) ↑ | ↑           | ↓          |
 | volatility (σ) ↑     | ↑           | ↓          |
-|                      |             |            |
+| repo rate (q)        |             |            |
+
+| Implied volatility   | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
+
+| American             | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
+
+| Geometric Basket     | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
+
+| Arithmetic Basket    | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
+
+| Geometric Asian      | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
+
+| Arithmetic Asian     | Call option | Put option |
+| -------------------- | ----------- | ---------- |
+| spot price (S) ↑     |             |            |
+| strike (K) ↑         | ↓↓          | ↑↑         |
+| maturity (T) ↑       | ↑           | ↓          |
+| risk free rate (r) ↑ | ↑           | ↓          |
+| volatility (σ) ↑     | ↑           | ↓          |
+| repo rate (q)        |             |            |
 
 TODO:floppy_disk:

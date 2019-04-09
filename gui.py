@@ -33,11 +33,11 @@ def price():
         hint.set("...")
         if chosen.get() == "European option":
             price_ans = european.price(entry_s.get(), entry_sig.get(), entry_r.get(), entry_t.get(), entry_k.get(),
-                                       optiontype.get())
+                                       optiontype.get(), entry_q.get())
             ans.set(price_ans)
         elif chosen.get() == "American option":
             price_ans = american.price(entry_s.get(), entry_sig.get(), entry_r.get(), entry_t.get(), entry_k.get(),
-                                      entry_n.get(), optiontype.get())
+                                       entry_n.get(), optiontype.get())
             ans.set(price_ans)
         elif chosen.get() == "Geometric Asian option":
             price_ans = asian_geometric.price(entry_s.get(), entry_sig.get(), entry_r.get(), entry_t.get(),
@@ -58,7 +58,7 @@ def price():
                                                 entry_sig1.get(), entry_p.get(), entry_r.get(), entry_t.get(),
                                                 entry_k.get(), optiontype.get(), entryvariate.get())
             ans.set(price_ans)
-        elif chosen.get() == "Implied volatility calculator":
+        elif chosen.get() == "Implied volatility":
             price_ans = volatility.price(entry_s.get(), entry_V.get(), entry_r.get(), entry_t.get(), entry_k.get(),
                                          entry_q.get(), optiontype.get())
             ans.set(price_ans)
@@ -83,9 +83,8 @@ answer1 = Label(root, text="Answer:", bg='yellow', font='Helvetica -16 bold')
 option_type = Label(root, text="Choose the Option Type")
 comValue = StringVar()
 chosen = ttk.Combobox(root, textvariable=comValue, width=25)
-chosen["values"] = ["European option", "American option", "Geometric basket option",
-                    "Arithmetic basket option", "Geometric Asian option", "Arithmetic Asian option",
-                    "Implied volatility calculator"]
+chosen["values"] = ["European option", "American option", "Geometric basket option", "Arithmetic basket option",
+                    "Geometric Asian option", "Arithmetic Asian option", "Implied volatility"]
 chosen.current(0)
 # #
 optiontype = StringVar()
@@ -134,7 +133,6 @@ variate1 = Radiobutton(root, text="geo- (1)", variable=entryvariate, value="1")
 # #Btn
 submitBtn = Button(root, text="  Submit \n  Input  ", fg="green", command=price, font='Helvetica -14 bold')
 clearBtn = Button(root, text="clear input", fg="red", command=clear, font='Helvetica -14 bold')
-
 
 # ===========================================position==================================================
 # top

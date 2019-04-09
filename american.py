@@ -1,10 +1,10 @@
 import math
 
 
-def price(S1, vol1, r1, T1, K1, n1, type1):
+def price(S1, sigma1, r1, T1, K1, n1, type1):
     # parameters
     S = float(S1)
-    vol = float(vol1)
+    sigma = float(sigma1)
     r = float(r1)
     T = float(T1)
     K = float(K1)
@@ -18,7 +18,7 @@ def price(S1, vol1, r1, T1, K1, n1, type1):
     dt = T / (n - 1)
     df = math.exp(-r * dt)
     # choosing u and d
-    u = math.exp(vol * math.sqrt(dt))
+    u = math.exp(sigma * math.sqrt(dt))
     d = 1 / u
     # calculate risk neutral probability
     p = (math.exp(r * dt) - d) / (u - d)
