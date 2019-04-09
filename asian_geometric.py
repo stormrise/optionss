@@ -1,7 +1,6 @@
 # Geometric Asian Option
 import math
 from scipy import stats
-# from sympy import *
 
 
 def price(S1, sigma1, r1, T1, K1, n1, option_type1):

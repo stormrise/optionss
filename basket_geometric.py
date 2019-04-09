@@ -1,7 +1,6 @@
 # import decimal
 import math
 from scipy import stats
-# from sympy import *
 
 
 def price(S1, S2, sigma1, sigma2, rho, r, T, K, option_type):
@@ -19,8 +18,7 @@ def price(S1, S2, sigma1, sigma2, rho, r, T, K, option_type):
     mean = r_ - 0.5 * (sigma1_ * sigma1_ + sigma2_ * sigma2_) / 2 + 0.5 * sigma_ * sigma_
 
     Bg0 = math.sqrt(S1_ * S2_)
-    d1 = (math.log(Bg0 / K_) + (mean + 0.5 * math.pow(sigma_, 2)) * T_) / \
-         (sigma_ * math.sqrt(T_))
+    d1 = (math.log(Bg0 / K_) + (mean + 0.5 * math.pow(sigma_, 2)) * T_) / (sigma_ * math.sqrt(T_))
     d2 = d1 - sigma_ * math.sqrt(T_)
 
     if type_ == "call":

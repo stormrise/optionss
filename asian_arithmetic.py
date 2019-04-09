@@ -1,7 +1,6 @@
 # Arithmetic Asian Option
 import math
 import random
-# from sympy import *
 import numpy as np
 
 import asian_geometric  # use Geometric Asian
@@ -28,18 +27,6 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
     spath = [0 for x in range(0, path)]
     arith_payoff = []
     geo_payoff = []
-    # Z = [0 for x in range(0, path + 1)]
-    # num = 1
-    # j = 2
-    # geo = 0
-    # geo_sum = 0
-    # geo_std = 0
-    # arith = 0
-    # arith_sum = 0
-    # arith_std = 0
-    # xSum = 0
-    # z_sum = 0
-    # z_std = 0
 
     #
     drift = math.exp((r - 0.5 * math.pow(sigma, 2)) * dt)
@@ -58,48 +45,20 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
         if option_type == "call":
             arith_payoff.append(max(math.exp(-r * T) * (arith_average - K), 0))
             geo_payoff.append(max(math.exp(-r * T) * (geo_average - K), 0))
-            """if arith_average > K:
-                arith_payoff[num] = math.exp(-r*T)*(arith_average-K)
-            else:
-                arith_payoff[num] = 0
-            if geo_average > K:
-                geo_payoff[num] = math.exp(-r*T)*(geo_average-K)
-            else:
-                geo_payoff[num] = 0"""
+
         else:  # put
             arith_payoff.append(max(math.exp(-r * T) * (K - arith_average), 0))
             geo_payoff.append(max(math.exp(-r * T) * (K - geo_average), 0))
-            """if arith_average < K:
-                arith_payoff[num] = math.exp(-r * T) * (K - arith_average)
-            else:
-                arith_payoff[num] = 0
-            if geo_average < K:
-                geo_payoff[num] = math.exp(-r * T) * (K - geo_average)
-            else:
-                geo_payoff[num] = 0"""
 
     # Arithmetic mean
     arith_mean = np.mean(np.array(arith_payoff))
     arith_std = np.std(np.array(arith_payoff))
-    """for i in range(1, path + 1):
-        arith_sum += arith_payoff[i]
-    arith_mean = arith_sum / path
-    for i in range(1, path + 1):
-        arith_std = arith_std + math.pow((arith_payoff[i] - arith_mean), 2)
-    arith_std = math.pow(arith_std / path, 1 / 2)"""
+
     # Geometric mean
     geo_mean = np.mean(np.array(geo_payoff))
     geo_std = np.std(np.array(geo_payoff))
-    """for i in range(1, path + 1):
-        geo_sum += geo_payoff[i]
-    geo_mean = geo_sum / path
-    for i in range(1, path + 1):
-        geo_std = geo_std + math.pow((geo_payoff[i] - geo_mean), 2)
-    geo_std = math.pow(geo_std / path, 1 / 2)"""
+
     # Control Variate
-    """for i in range(1, path + 1):
-        xSum += arith_payoff[i] * geo_payoff[i]
-    xMean = xSum / path"""
     cov_xy = np.mean(np.array(arith_payoff) * np.array(geo_payoff)) - geo_mean * arith_mean
     theta = cov_xy / math.pow(geo_std, 2)
 
@@ -109,13 +68,8 @@ def price(path1, S1, sigma1, r1, T1, K1, n1, option_type1, variate1):
         b = arith_mean + 1.96 * arith_std / math.sqrt(path)
         return "[" + str(a) + "," + str(b) + "]"
     elif variate == 1:  # geometric Asian option
-        """for i in range(1, path + 1):
-            Z[i] = arith_payoff[i] + theta * (geo_asian_price - geo_payoff[i])
-            zSum += Z[i]"""
         z_sum = np.array(arith_payoff) + theta * (geo_asian_price - np.array(geo_payoff))
         z_mean = np.mean(z_sum)
-        """for j in range(1, path + 1):
-            z_std += math.pow((Z[j] - z_mean), 2)"""
         z_std = np.std(z_sum)
         a = z_mean - 1.96 * z_std / math.sqrt(path)
         b = z_mean + 1.96 * z_std / math.sqrt(path)

@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 
 import european
-import america
+import american
 import asian_geometric
 import asian_arithmetic
 import basket_geometric
@@ -36,7 +36,7 @@ def price():
                                        optiontype.get())
             ans.set(price_ans)
         elif chosen.get() == "American option":
-            price_ans = america.price(entry_s.get(), entry_sig.get(), entry_r.get(), entry_t.get(), entry_k.get(),
+            price_ans = american.price(entry_s.get(), entry_sig.get(), entry_r.get(), entry_t.get(), entry_k.get(),
                                       entry_n.get(), optiontype.get())
             ans.set(price_ans)
         elif chosen.get() == "Geometric Asian option":
