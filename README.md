@@ -118,6 +118,40 @@ This file defines a function to calculate the price of arithmetic asian call/put
 
 how each parameter aﬀects the option price
 
+#### Test cases:
+
+**Asian option:**
+
+| σ   | K   | n   | Type | Geometric | Arithmetic | Arithmetic(variate) |
+| --- | --- | --- | ---- | --------- | ---------- | ------------------- |
+| 0.3 | 100 | 50  | Put  |           |            |                     |
+| 0.3 | 100 | 100 | Put  |           |            |                     |
+| 0.4 | 100 | 50  | Put  |           |            |                     |
+|     |     |     |      |           |            |                     |
+| 0.3 | 100 | 50  | Call |           |            |                     |
+| 0.3 | 100 | 100 | Call |           |            |                     |
+| 0.4 | 100 | 50  | Call |           |            |                     |
+
+**Basket options:**
+
+| S1(0) | S2(0) | K   | σ1  | σ2  | ρ   | Type | Geometric | Arithmetic | Arithmetic(variate) |
+| ----- | ----- | --- | --- | --- | --- | ---- | --------- | ---------- | ------------------- |
+| 100   | 100   | 100 | 0.3 | 0.3 | 0.5 | Put  |           |            |                     |
+| 100   | 100   | 100 | 0.3 | 0.3 | 0.9 | Put  |           |            |                     |
+| 100   | 100   | 100 | 0.1 | 0.3 | 0.5 | Put  |           |            |                     |
+| 100   | 100   | 80  | 0.3 | 0.3 | 0.5 | Put  |           |            |                     |
+| 100   | 100   | 120 | 0.3 | 0.3 | 0.5 | Put  |           |            |                     |
+| 100   | 100   | 100 | 0.5 | 0.5 | 0.5 | Put  |           |            |                     |
+|       |       |     |     |     |     |      |           |            |                     |
+| 100   | 100   | 100 | 0.3 | 0.3 | 0.5 | Call |           |            |                     |
+| 100   | 100   | 100 | 0.3 | 0.3 | 0.9 | Call |           |            |                     |
+| 100   | 100   | 100 | 0.1 | 0.3 | 0.5 | Call |           |            |                     |
+| 100   | 100   | 80  | 0.3 | 0.3 | 0.5 | Call |           |            |                     |
+| 100   | 100   | 120 | 0.3 | 0.3 | 0.5 | Call |           |            |                     |
+| 100   | 100   | 100 | 0.5 | 0.5 | 0.5 | Call |           |            |                     |
+
+#### Analysis:
+
 | European             | Call option | Put option |
 | -------------------- | ----------- | ---------- |
 | spot price (S) ↑     |             |            |
