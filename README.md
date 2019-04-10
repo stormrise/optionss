@@ -1,4 +1,4 @@
-# Group 17's option pricer
+# Group 17's Option Pricer
 
 > :thumbsup:Contributions:
 > 
@@ -14,25 +14,9 @@ Environment requirements:
 
 - **Environment**: Python 3.6
 
-- **Packages**: 
-
-  - tkinter: for UI
-
-  - traceback: capturing log
-
-  - math: for some math function calculations such as root, square and so on
-
-  - scipy: for standard normal distribution density function calculation
-
-  - random: for generating Gaussian distribution random numbers
-
-  - numpy: for matrix operations
+- **Packages**: **tkinter** : for UI, **traceback**: for capturing log, **math**: for some math calculations (root, square), **scipy**: for standard normal distribution density function, **random**: for generating Gaussian distribution random, **numpy**: for matrix operations
 
 :red_circle:To **Run** our option pricer, just put all the .py files in the same directory, and run `gui.py`. 
-
-```bash
-bash:~$ python3 gui.py
-```
 
 ## GUI
 
@@ -74,51 +58,59 @@ after all correct, the answer will be calculated and display in above.
 
 `european.py`    *(S, sigma, r, T, K, type, q)*
 
-Using Black-Scholes Formulas: with BS-PDE & Call-Put Parity
+Using Lecture 3 **Black-Scholes Formulas**: with BS-PDE & Call-Put Parity
 
 $$
-C(S,t)=SN(d_1)-Ke^{-rT}N(d_2) \qquad P(S,t)=Ke^{-rT}N(-d_2)-SN(-d_1)
+C(S,t)=Se^{-qT}N(d_1)-Ke^{-rT}N(d_2) \qquad P(S,t)=Ke^{-rT}N(-d_2)-Se^{-qT}N(-d_1)
 $$
 
 $$
-in\ which:\qquad d_1={{ln(S/k)+rT}\over{\sigma \sqrt{T}}}+{1\over2}\sigma\sqrt{T} \qquad d_2={{ln(S/k)+rT}\over{\sigma \sqrt{T}}}-{1\over2}\sigma\sqrt{T}
+in\ which:\qquad d_1={{ln(S/k)+(r-q)T}\over{\sigma \sqrt{T}}}+{1\over2}\sigma \sqrt{T} \qquad d_2={{ln(S/k)+(r-q)T}\over{\sigma \sqrt{T}}}-{1\over2}\sigma \sqrt{T}
 $$
 
 ### Implied volatility
 
 `volatility.py`    *(S, S_true, r, T, K, q, type)*
 
-This file defines a function to calculate the implied volatility of call/put options. All the inputs of this function are strings captured by GUI so the first step is type conversion. Then, just follow the formulas in "lecture 4" using Newton Method to solve the problem which converges quickly, we can figure out the implied volatility of call/put options.
+Follow the formulas in "lecture 4" using **Newton Method** to solve the problem which converges quickly:
+
+$$
+\hat{\sigma}=\sqrt{2 \mid {{lnS_0/K+(r-q)T}\over T}\mid} \qquad vega={{Se^{-qT}\sqrt{T} *e^{-0.5(d1^2)}}\over{\sqrt{2\pi}}}
+$$
 
 ### American Option
 
 `american.py`    *(S, sigma, r, T, K, n, type)*
 
-This file defines a function to calculate the price of American call/put options. All the inputs of this function are strings captured by GUI so the first step is type conversion. There is no closed formular, so we use bionominal tree to solve it. First step is to iterate the bionominal tree and calculate the stock price in each node. Second step is to backtrack the tree and calculate the price of call/put options.
+There is no closed formular, so we use **bionominal tree** in "lecture 6" to solve it. First step is to iterate the bionominal tree and calculate the stock price in each node. Second step is to backtrack the tree and calculate the price of call/put options.
+
+$$
+Se^{r\Delta t}=pS_u+(1-p)S_d \qquad p={{e^{r\Delta t}-d}\over{u-d}} \qquad u=e^{\sigma \sqrt{\Delta t}} \qquad d={1\over u} =e^{-\sigma \sqrt{\Delta t}}
+$$
 
 ### Geometric Basket Option
 
 `baskt_geometric.py`    *(S1, S2, sigma1, sigma2, rho, r, T, K, option_type)*
 
-This file defines a function to calculate the price of geometric basket call/put options. All the inputs of this function are strings captured by GUI so the first step is type conversion. Then, just follow the formulas described in mathematical background in "assignment 3", we can figure out the call or put geometric basket option.
+Follow the formulas described in mathematical background in "assignment 3", we can figure out the call or put geometric basket option.
 
 ### Arithmetic Basket Option
 
 `basket_arithmetic.py`    *(path, S1, S2, sigma1, sigma2, rho, r, T, K, option_type, variate)*
 
-This file defines a function to calculate the price of arithmetic basket call/put options. The first step is also type conversion of inputted varibles. For arithmetic option price, there is no closed-form formulas so we need to use Monte Carlo to simulate it. We use the method proved in assignment 2 (2.1)  to generate two random varibles with correlation coefficient σ. Then, similar to Asian option, we can calculate the basket option price (95% confidence interval) with or without control variate.
+For arithmetic option price, there is no closed-form formulas so we need to use Monte Carlo to simulate it. We use the method proved in assignment 2 (2.1)  to generate two random varibles with correlation coefficient σ. Then, similar to Asian option, we can calculate the basket option price (95% confidence interval) with or without control variate.
 
 ### Geometric Asian option
 
 `asian_geometric.py`    *(S, sigma, r, T, K, n, option_type)*
 
-This file defines a function to calculate the price of geometric asian call/put options. And there is a closed formular we can simply implement it.
+There is a closed formular we can simply implement it.
 
 ### Arithmetic Asian option
 
 `asian_arithmetic.py`   *(path, S, sigma, r, T, K, n, option_type, variate)*
 
-This file defines a function to calculate the price of arithmetic asian call/put options. There is no closed-form formulas so we need to use Monte Carlo to simulate it.
+There is no closed-form formulas so we need to use Monte Carlo to simulate it.
 
 ---
 
