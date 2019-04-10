@@ -92,25 +92,47 @@ $$
 
 `baskt_geometric.py`    *(S1, S2, sigma1, sigma2, rho, r, T, K, option_type)*
 
-Follow the formulas described in mathematical background in "assignment 3", we can figure out the call or put geometric basket option.
+Follow the formulas described in mathematical background in "assignment 3" **geometric Brownian motion**, we can figure out the call or put geometric basket option. 
+
+$$
+B_g(t)=(\prod_{i=1}^n)^{1/n} \qquad \sigma_{B_g}={\sqrt{\sum_{i=1}^{n=2} \sum_{j=1}^{n=2} \sigma_i \sigma_j \rho_{i,j}}\over 2} \qquad \mu_{B_g}=r-{1\over 2}{\sum_{i=1}^{n=2} \sigma_i^2\over n}+{1\over 2}\sigma_{B_g}^2 \qquad n=2
+$$
+
+$$
+C_{B_g}=e^{-rT}(B_g(0)e^{\mu T}N(\hat{d_1})-KN(\hat{d_2})) \qquad P_{B_g}=e^{-rT}(KN(-\hat{d_2})-B_g(0)e^{\mu T}N(-\hat{d_1}))
+$$
 
 ### Arithmetic Basket Option
 
 `basket_arithmetic.py`    *(path, S1, S2, sigma1, sigma2, rho, r, T, K, option_type, variate)*
 
-For arithmetic option price, there is no closed-form formulas so we need to use Monte Carlo to simulate it. We use the method proved in assignment 2 (2.1)  to generate two random varibles with correlation coefficient σ. Then, similar to Asian option, we can calculate the basket option price (95% confidence interval) with or without control variate.
+For arithmetic option price, there is no closed-form formulas so we need to use **Monte Carlo** to simulate it. We use the method proved in assignment 2 (2.1)  to generate two random varibles with correlation coefficient σ. Then, similar to Asian option, we can calculate the basket option price (95% confidence interval) with or without control variate. 
+
+$$
+B_a(t)={1\over n}\sum_{i=1}^nSi(t) \qquad n=2
+$$
 
 ### Geometric Asian option
 
 `asian_geometric.py`    *(S, sigma, r, T, K, n, option_type)*
 
-There is a closed formular we can simply implement it.
+There is a closed formular in "lecture 5" we can simply implement it.
+
+$$
+\hat{\sigma}=\sigma \sqrt{{(n+1)(2n+1)}\over 6n^2} \qquad \hat{\mu}=(r-{1\over 2}\sigma^2){(n+1)\over 2n}+{1\over 2}\hat{\sigma}^2
+$$
+
+$$
+C_{A_g}=e^{-rT}(S_0e^{\hat{\mu} T}N(\hat{d_1})-KN(\hat{d_2})) \qquad P_{A_g}=e^{-rT}(KN(-\hat{d_2})-S_0e^{\hat{\mu} T}N(-\hat{d_1}))
+$$
 
 ### Arithmetic Asian option
 
 `asian_arithmetic.py`   *(path, S, sigma, r, T, K, n, option_type, variate)*
 
-There is no closed-form formulas so we need to use Monte Carlo to simulate it.
+There is no closed-form formulas so we need to use **Monte Carlo** to simulate it.
+
+
 
 ---
 
