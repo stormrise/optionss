@@ -75,7 +75,7 @@ $$
 Follow the formulas in "lecture 4" using **Newton Method** to solve the problem which converges quickly:
 
 $$
-\hat{\sigma}=\sqrt{2 \mid {{lnS_0/K+(r-q)T}\over T}\mid} \qquad vega={{Se^{-qT}\sqrt{T} *e^{-0.5(d1^2)}}\over{\sqrt{2\pi}}}
+\hat{\sigma}=\sqrt{2 \mid {{lnS_0/K+(r-q)T}\over T}\mid} \qquad vega={{Se^{-qT}\sqrt{T} \times e^{-0.5(d1^2)}}\over{\sqrt{2\pi}}}
 $$
 
 ### American Option
@@ -112,6 +112,8 @@ $$
 B_a(t)={1\over n}\sum_{i=1}^nSi(t) \qquad n=2
 $$
 
+Rest is similar to Asian-Arithmetic, 2 drift, 2 growthFactor. simulate multiple times output the 95% conﬁdence interval.
+
 ### Geometric Asian option
 
 `asian_geometric.py`    *(S, sigma, r, T, K, n, option_type)*
@@ -132,7 +134,11 @@ $$
 
 There is no closed-form formulas so we need to use **Monte Carlo** to simulate it.
 
+$$
+drift=e^{(r-0.5\sigma^2)\Delta t} \qquad growthFactor=drift \times e^{\sigma \sqrt{\Delta t}\times gaussRandom}
+$$
 
+Then calculate the mean, std, cov of the payoff, simulate multiple times output the 95% conﬁdence interval.
 
 ---
 
@@ -197,7 +203,6 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 | maturity (T) ↑       | ↑           | ↓          |
 | risk free rate (r) ↑ | ↑           | ↓          |
 | volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
 
 | Arithmetic Basket    | Call option | Put option |
 | -------------------- | ----------- | ---------- |
@@ -206,7 +211,6 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 | maturity (T) ↑       | ↑           | ↓          |
 | risk free rate (r) ↑ | ↑           | ↓          |
 | volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
 
 #### European:
 
@@ -226,23 +230,10 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 
 | European             | Call option | Put option |
 | -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
 | strike (K) ↑         | ↓↓          | ↑↑         |
 | maturity (T) ↑       | ↑           | ↓          |
 | risk free rate (r) ↑ | ↑           | ↓          |
 | volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
-
-#### Implied volatility:
-
-| Implied volatility   | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
 
 #### American:
 
@@ -262,11 +253,9 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 
 | American             | Call option | Put option |
 | -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
 | strike (K) ↑         | ↓↓          | ↑↑         |
 | maturity (T) ↑       | ↑           | ↓          |
 | risk free rate (r) ↑ | ↑           | ↓          |
 | volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
 
 TODO:floppy_disk:
