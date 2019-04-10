@@ -15,17 +15,17 @@ Environment requirements:
 - **Environment**: Python 3.6
 
 - **Packages**: 
-  
+
   - tkinter: for UI
-  
+
   - traceback: capturing log
-  
+
   - math: for some math function calculations such as root, square and so on
-  
+
   - scipy: for standard normal distribution density function calculation
-  
+
   - random: for generating Gaussian distribution random numbers
-  
+
   - numpy: for matrix operations
 
 :red_circle:To **Run** our option pricer, just put all the .py files in the same directory, and run `gui.py`. 
@@ -74,7 +74,11 @@ after all correct, the answer will be calculated and display in above.
 
 `european.py`    *(S, sigma, r, T, K, type, q)*
 
-This file defines a function to calculate the price of European call/put options. And there is a closed formular, we can simply implement it.
+Using Black-Scholes Formulas: with BS-PDE & Call-Put Parity
+
+$C(S,t)=SN(d_1)-Ke^{-rT}N(d_2)$    $P(S,t)=Ke^{-rT}N(-d_2)-SN(-d_1)$ 
+
+in which:  $d_1={{ln(S/k)+rT}\over{\sigma \sqrt{T}}}+{1\over2}\sigma\sqrt{T}$     $d_2={{ln(S/k)+rT}\over{\sigma \sqrt{T}}}-{1\over2}\sigma\sqrt{T}$
 
 ### Implied volatility
 
@@ -132,23 +136,15 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 | 0.3 | 100 | 100 | Call | 13.138    | 14.482~14.768 | 14.598~14.620       |
 | 0.4 | 100 | 50  | Call | 15.759    | 18.072~18.476 | 18.181~18.222       |
 
-| Geometric Asian      | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
+| Geometric Asian     | Call option | Put option |
+| ------------------- | ----------- | ---------- |
+| volatility (σ) ↑    | ↑↑          | ↑↑         |
+| average steps (n) ↑ | ↓           | ↓          |
 
-| Arithmetic Asian     | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
-| repo rate (q)        |             |            |
+| Arithmetic Asian    | Call option | Put option |
+| ------------------- | ----------- | ---------- |
+| volatility (σ) ↑    | ↑↑          | ↑↑         |
+| average steps (n) ↑ | ↓           | ↓          |
 
 #### Basket options:
 
@@ -196,19 +192,19 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 
 #### European:
 
-| S1(0) |  K  | σ1  |   r  |  T  |   Type    | European  |
-| ----- | --- | --- | ---- | --- |---------- | --------- |
-| 100   | 100 | 0.2 | 0.01 | 0.5 |   call    | 5.876024  |
-| 100   | 120 | 0.2 | 0.01 | 0.5 |   call    | 0.774138  |
-| 100   | 120 | 0.2 | 0.01 |  1  |   call    | 8.433318  |
-| 100   | 100 | 0.3 | 0.01 | 0.5 |   call    | 8.677645  |
-| 100   | 100 | 0.2 | 0.02 | 0.5 |   call    | 6.120654  |
-|       |     |     |      |     |           |           |
-| 100   | 100 | 0.2 | 0.01 | 0.5 |   put     | 5.377272  |
-| 100   | 120 | 0.2 | 0.01 | 0.5 |   put     | 20.17563  |
-| 100   | 120 | 0.2 | 0.01 |  1  |   put     | 7.438302  |
-| 100   | 100 | 0.3 | 0.01 | 0.5 |   put     | 8.178893  |
-| 100   | 100 | 0.2 | 0.02 | 0.5 |   put     | 5.125637  |
+| S1(0) | K   | σ1  | r    | T   | Type | European |
+| ----- | --- | --- | ---- | --- | ---- | -------- |
+| 100   | 100 | 0.2 | 0.01 | 0.5 | call | 5.876024 |
+| 100   | 120 | 0.2 | 0.01 | 0.5 | call | 0.774138 |
+| 100   | 120 | 0.2 | 0.01 | 1   | call | 8.433318 |
+| 100   | 100 | 0.3 | 0.01 | 0.5 | call | 8.677645 |
+| 100   | 100 | 0.2 | 0.02 | 0.5 | call | 6.120654 |
+|       |     |     |      |     |      |          |
+| 100   | 100 | 0.2 | 0.01 | 0.5 | put  | 5.377272 |
+| 100   | 120 | 0.2 | 0.01 | 0.5 | put  | 20.17563 |
+| 100   | 120 | 0.2 | 0.01 | 1   | put  | 7.438302 |
+| 100   | 100 | 0.3 | 0.01 | 0.5 | put  | 8.178893 |
+| 100   | 100 | 0.2 | 0.02 | 0.5 | put  | 5.125637 |
 
 | European             | Call option | Put option |
 | -------------------- | ----------- | ---------- |
@@ -232,19 +228,19 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 
 #### American:
 
-| S1(0) |  K  | σ1  |   r  |  T  |   Type    | European  |
-| ----- | --- | --- | ---- | --- |---------- | --------- |
-| 100   | 100 | 0.2 | 0.01 | 0.5 |   call    | 5.861975  |
-| 100   | 120 | 0.2 | 0.01 | 0.5 |   call    | 0.776743  |
-| 100   | 100 | 0.2 | 0.01 |  1  |   call    | 8.413504  |
-| 100   | 100 | 0.3 | 0.01 | 0.5 |   call    | 8.656601  |
-| 100   | 100 | 0.2 | 0.02 | 0.5 |   call    | 6.106614  |
-|       |     |     |      |     |           |           |
-| 100   | 100 | 0.2 | 0.01 | 0.5 |   put     | 5.363223  |
-| 100   | 120 | 0.2 | 0.01 | 0.5 |   put     | 20.17824  |
-| 100   | 100 | 0.2 | 0.01 |  1  |   put     | 7.418488  |
-| 100   | 100 | 0.3 | 0.01 | 0.5 |   put     | 8.157849  |
-| 100   | 100 | 0.2 | 0.02 | 0.5 |   put     | 5.111597  |
+| S1(0) | K   | σ1  | r    | T   | Type | European |
+| ----- | --- | --- | ---- | --- | ---- | -------- |
+| 100   | 100 | 0.2 | 0.01 | 0.5 | call | 5.861975 |
+| 100   | 120 | 0.2 | 0.01 | 0.5 | call | 0.776743 |
+| 100   | 100 | 0.2 | 0.01 | 1   | call | 8.413504 |
+| 100   | 100 | 0.3 | 0.01 | 0.5 | call | 8.656601 |
+| 100   | 100 | 0.2 | 0.02 | 0.5 | call | 6.106614 |
+|       |     |     |      |     |      |          |
+| 100   | 100 | 0.2 | 0.01 | 0.5 | put  | 5.363223 |
+| 100   | 120 | 0.2 | 0.01 | 0.5 | put  | 20.17824 |
+| 100   | 100 | 0.2 | 0.01 | 1   | put  | 7.418488 |
+| 100   | 100 | 0.3 | 0.01 | 0.5 | put  | 8.157849 |
+| 100   | 100 | 0.2 | 0.02 | 0.5 | put  | 5.111597 |
 
 | American             | Call option | Put option |
 | -------------------- | ----------- | ---------- |
