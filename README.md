@@ -76,9 +76,13 @@ after all correct, the answer will be calculated and display in above.
 
 Using Black-Scholes Formulas: with BS-PDE & Call-Put Parity
 
-$C(S,t)=SN(d_1)-Ke^{-rT}N(d_2)$    $P(S,t)=Ke^{-rT}N(-d_2)-SN(-d_1)$ 
+$$
+C(S,t)=SN(d_1)-Ke^{-rT}N(d_2) \qquad P(S,t)=Ke^{-rT}N(-d_2)-SN(-d_1)
+$$
 
-in which:  $d_1={{ln(S/k)+rT}\over{\sigma \sqrt{T}}}+{1\over2}\sigma\sqrt{T}$     $d_2={{ln(S/k)+rT}\over{\sigma \sqrt{T}}}-{1\over2}\sigma\sqrt{T}$
+$$
+in\ which:\qquad d_1={{ln(S/k)+rT}\over{\sigma \sqrt{T}}}+{1\over2}\sigma\sqrt{T} \qquad d_2={{ln(S/k)+rT}\over{\sigma \sqrt{T}}}-{1\over2}\sigma\sqrt{T}
+$$
 
 ### Implied volatility
 
