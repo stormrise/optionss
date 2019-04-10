@@ -196,21 +196,27 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 | 100   | 100   | 100 | 0.3 | 0.3 | 0.5 | Call r=0.1 | 29.023    | 31.588~32.112 | 31.710~31.773       |
 | 100   | 100   | 100 | 0.3 | 0.3 | 0.5 | Call T=1   | 12.015    | 12.649~12.889 | 12.715~12.733       |
 
-| Geometric Basket     | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↓     | ↑           |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
+| Geometric Basket                    | Call option | Put option |
+| ----------------------------------- | ----------- | ---------- |
+| spot price (S1) ↑                   | ↑           | ↓          |
+| spot price (S1) ↑ (S1)↑             | ↑↑          | ↓↓         |
+| strike (K) ↓                        | ↑           | ↓          |
+| maturity (T) ↓                      | ↓           | ↓          |
+| risk free rate (r) ↑                | ↑           | ↓          |
+| volatility (σ1) ↓                   | ↓           | ↓          |
+| volatility (σ1) ↑ volatility (σ2) ↑ | ↑           | ↑          |
+| correlation coefficient (ρ) ↑       | ↑           | ↑          |
 
-| Arithmetic Basket    | Call option | Put option |
-| -------------------- | ----------- | ---------- |
-| spot price (S) ↑     |             |            |
-| strike (K) ↑         | ↓↓          | ↑↑         |
-| maturity (T) ↑       | ↑           | ↓          |
-| risk free rate (r) ↑ | ↑           | ↓          |
-| volatility (σ) ↑     | ↑           | ↓          |
+| Arithmetic Basket                   | Call option | Put option |
+| ----------------------------------- | ----------- | ---------- |
+| spot price (S) ↑                    | ↑           | ↓          |
+| spot price (S1) ↑ (S1)↑             | ↑↑          | ↓↓         |
+| strike (K) ↓                        | ↑           | ↓          |
+| maturity (T) ↓                      | ↓           | ↓          |
+| risk free rate (r) ↑                | ↑           | ↓          |
+| volatility (σ) ↓                    | ↓           | ↓          |
+| volatility (σ1) ↑ volatility (σ2) ↑ | ↑           | ↑          |
+| correlation coefficient (ρ) ↑       | ↑           | ↑          |
 
 #### European:
 
