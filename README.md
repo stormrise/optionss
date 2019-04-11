@@ -106,7 +106,7 @@ $$
 
 `basket_arithmetic.py`    *(path, S1, S2, sigma1, sigma2, rho, r, T, K, option_type, variate)*
 
-For arithmetic option price, there is no closed-form formulas so we need to use **Monte Carlo** to simulate it. We use the method proved in assignment 2 (2.1)  to generate two random varibles with correlation coefficient σ. Then, similar to Asian option, we can calculate the basket option price (95% confidence interval) with or without control variate. 
+For arithmetic option price, there is no closed-form formulas so we need to use **Monte Carlo** to simulate the stock price. We use the method proved in assignment 2 (2.1)  to generate two random varibles with correlation coefficient σ. Then, similar to Asian option, we can calculate the basket option price (95% confidence interval) with or without control variate. 
 
 $$
 B_a(t)={1\over n}\sum_{i=1}^nSi(t) \qquad n=2
@@ -198,23 +198,23 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 
 | Geometric Basket                    | Call option | Put option |
 | ----------------------------------- | ----------- | ---------- |
-| spot price (S1) ↑                   | ↑           | ↓          |
+| spot price (S1) ↑                   | ↑           | ↓          |
 | spot price (S1) ↑ (S1)↑             | ↑↑          | ↓↓         |
-| strike (K) ↓                        | ↑           | ↓          |
-| maturity (T) ↓                      | ↓           | ↓          |
+| strike (K) ↓                        | ↑           | ↓          |
+| maturity (T) ↓                      | ↓           | ↓          |
 | risk free rate (r) ↑                | ↑           | ↓          |
-| volatility (σ1) ↓                   | ↓           | ↓          |
+| volatility (σ1) ↓                   | ↓           | ↓          |
 | volatility (σ1) ↑ volatility (σ2) ↑ | ↑           | ↑          |
-| correlation coefficient (ρ) ↑       | ↑           | ↑          |
+| correlation coefficient (ρ) ↑       | ↑           | ↑          |
 
 | Arithmetic Basket                   | Call option | Put option |
 | ----------------------------------- | ----------- | ---------- |
 | spot price (S) ↑                    | ↑           | ↓          |
 | spot price (S1) ↑ (S1)↑             | ↑↑          | ↓↓         |
-| strike (K) ↓                        | ↑           | ↓          |
-| maturity (T) ↓                      | ↓           | ↓          |
+| strike (K) ↓                        | ↑           | ↓          |
+| maturity (T) ↓                      | ↓           | ↓          |
 | risk free rate (r) ↑                | ↑           | ↓          |
-| volatility (σ) ↓                    | ↓           | ↓          |
+| volatility (σ) ↓                    | ↓           | ↓          |
 | volatility (σ1) ↑ volatility (σ2) ↑ | ↑           | ↑          |
 | correlation coefficient (ρ) ↑       | ↑           | ↑          |
 
@@ -263,5 +263,3 @@ r = 0.05, T = 3, and S(0) = 100. paths in Monte Carlo simulation is m = 100, 000
 | maturity (T) ↑       | ↑           | ↓          |
 | risk free rate (r) ↑ | ↑           | ↓          |
 | volatility (σ) ↑     | ↑           | ↓          |
-
-TODO:floppy_disk:
